@@ -23,6 +23,14 @@ public class BigBoid : MonoBehaviour
     public Vector3 arriveTarget;
     public float slowingDistance = 10;
 
+    public Path path;
+    public bool isFollowPath;
+    public int currentWaypoint;
+    public bool isFlee;
+    public float fleeDistance;
+    public Transform fleeTargetTransform;
+    public Vector3 fleeTarget;
+
 
     public void OnDrawGizmos()
     {
@@ -68,12 +76,21 @@ public class BigBoid : MonoBehaviour
         return desired - velocity;
     }
 
+    //flee
+    public Vector3 Flee(Vector3 target)
+    {
+        Vector3 fromTarget = transform.position - target;
+        Vector3 desired = fromTarget.normalized * maxSpeed;
+
+        return (desired - velocity);
+    }
+
     public Vector3 CalculateForce()
     {
         Vector3 f = Vector3.zero;
         if (seekEnabled)
         {
-            if (seekTargetTransform != null)
+            if (seekTargetTransform != null && !isFollowPath)
             {
                 seekTarget = seekTargetTransform.position;
             }
@@ -82,19 +99,33 @@ public class BigBoid : MonoBehaviour
 
         if (arriveEnabled)
         {
-            if (arriveTargetTransform != null)
+            if (arriveTargetTransform != null && !isFollowPath)
             {
                 arriveTarget = arriveTargetTransform.position;                
             }
             f += Arrive(arriveTarget);
         }
 
+        //flee
+        if (isFlee)
+        {
+            if(fleeTargetTransform != null)
+            {
+                fleeTarget = fleeTargetTransform.position;
+            }
+
+            if(Vector3.Distance(transform.position, fleeTarget) <= fleeDistance)
+            {
+                f += Flee(fleeTarget);
+            }
+        }
+
         return f;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        FollowPath();
         force = CalculateForce();
         acceleration = force / mass;
         velocity = velocity + acceleration * Time.deltaTime;
@@ -104,5 +135,27 @@ public class BigBoid : MonoBehaviour
         {
             transform.forward = velocity;
         }        
+    }
+
+    void FollowPath()
+    {
+        if (isFollowPath)
+        {
+            if(currentWaypoint < path.waypoints.Length)
+            {
+                seekTarget = path.waypoints[currentWaypoint];
+                arriveTarget = path.waypoints[currentWaypoint];
+            }
+
+            if(Vector3.Distance(transform.position,arriveTarget) <= 1f)
+            {
+                currentWaypoint++;
+
+                if (path.isLooped && currentWaypoint >= path.waypoints.Length)
+                {
+                    currentWaypoint = 0;
+                }
+            }
+        }
     }
 }
