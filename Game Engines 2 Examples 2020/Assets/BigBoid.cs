@@ -24,12 +24,16 @@ public class BigBoid : MonoBehaviour
     public float slowingDistance = 10;
 
     public Path path;
-    public bool isFollowPath;
-    public int currentWaypoint;
-    public bool isFlee;
-    public float fleeDistance;
-    public Transform fleeTargetTransform;
-    public Vector3 fleeTarget;
+    public bool pathFollowingEnabled = false;
+    public float waypointDistance = 3;
+
+    // Banking
+    public float banking = 0.1f; 
+
+    public float damping = 0.1f;
+
+    public bool playerSteeringEnabled = false;
+    public float steeringForce = 100;
 
 
     public void OnDrawGizmos()
@@ -57,6 +61,33 @@ public class BigBoid : MonoBehaviour
         
     }
 
+    public Vector3 PlayerSteering()
+    {
+        Vector3 force = Vector3.zero;
+
+        force += Input.GetAxis("Vertical") * transform.forward * steeringForce;
+        force += Input.GetAxis("Horizontal") * transform.right * steeringForce;
+
+        return force;
+    }
+
+    public Vector3 PathFollow()
+    {
+        Vector3 nextWaypoint = path.NextWaypoint();
+        if (!path.looped && path.IsLast())
+        {
+            return Arrive(nextWaypoint);
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, nextWaypoint) < waypointDistance)
+            {
+                path.AdvanceToNext();
+            }
+            return Seek(nextWaypoint);
+        }
+    }
+
     public Vector3 Seek(Vector3 target)
     {
         Vector3 toTarget = target - transform.position;
@@ -76,21 +107,12 @@ public class BigBoid : MonoBehaviour
         return desired - velocity;
     }
 
-    //flee
-    public Vector3 Flee(Vector3 target)
-    {
-        Vector3 fromTarget = transform.position - target;
-        Vector3 desired = fromTarget.normalized * maxSpeed;
-
-        return (desired - velocity);
-    }
-
     public Vector3 CalculateForce()
     {
         Vector3 f = Vector3.zero;
         if (seekEnabled)
         {
-            if (seekTargetTransform != null && !isFollowPath)
+            if (seekTargetTransform != null)
             {
                 seekTarget = seekTargetTransform.position;
             }
@@ -99,33 +121,29 @@ public class BigBoid : MonoBehaviour
 
         if (arriveEnabled)
         {
-            if (arriveTargetTransform != null && !isFollowPath)
+            if (arriveTargetTransform != null)
             {
                 arriveTarget = arriveTargetTransform.position;                
             }
             f += Arrive(arriveTarget);
         }
 
-        //flee
-        if (isFlee)
+        if (pathFollowingEnabled)
         {
-            if(fleeTargetTransform != null)
-            {
-                fleeTarget = fleeTargetTransform.position;
-            }
+            f += PathFollow();
+        }
 
-            if(Vector3.Distance(transform.position, fleeTarget) <= fleeDistance)
-            {
-                f += Flee(fleeTarget);
-            }
+        if (playerSteeringEnabled)
+        {
+            return PlayerSteering();
         }
 
         return f;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        FollowPath();
         force = CalculateForce();
         acceleration = force / mass;
         velocity = velocity + acceleration * Time.deltaTime;
@@ -133,29 +151,14 @@ public class BigBoid : MonoBehaviour
         speed = velocity.magnitude;
         if (speed > 0)
         {
-            transform.forward = velocity;
+            //transform.forward = velocity;
+
+            Vector3 tempUp = Vector3.Lerp(transform.up, Vector3.up + (acceleration * banking), Time.deltaTime * 3.0f);
+            transform.LookAt(transform.position + velocity, tempUp);
+            //velocity *= 0.9f;
+
+            // Remove 10% of the velocity every second
+            velocity -= (damping * velocity * Time.deltaTime);
         }        
-    }
-
-    void FollowPath()
-    {
-        if (isFollowPath)
-        {
-            if(currentWaypoint < path.waypoints.Length)
-            {
-                seekTarget = path.waypoints[currentWaypoint];
-                arriveTarget = path.waypoints[currentWaypoint];
-            }
-
-            if(Vector3.Distance(transform.position,arriveTarget) <= 1f)
-            {
-                currentWaypoint++;
-
-                if (path.isLooped && currentWaypoint >= path.waypoints.Length)
-                {
-                    currentWaypoint = 0;
-                }
-            }
-        }
     }
 }
