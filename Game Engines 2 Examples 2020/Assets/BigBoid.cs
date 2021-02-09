@@ -66,7 +66,12 @@ public class BigBoid : MonoBehaviour
         Vector3 force = Vector3.zero;
 
         force += Input.GetAxis("Vertical") * transform.forward * steeringForce;
-        force += Input.GetAxis("Horizontal") * transform.right * steeringForce;
+
+        Vector3 desiredRight = transform.right;
+        desiredRight.y = 0;
+        desiredRight.Normalize();
+
+        force += Input.GetAxis("Horizontal") * desiredRight * steeringForce * 0.2f;
 
         return force;
     }
