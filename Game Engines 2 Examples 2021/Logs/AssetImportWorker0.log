@@ -107,3 +107,36 @@ Received Import Request.
 Start importing Assets/Boid.cs using Guid(ca72f3762818ae24991bed08eecca47a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b537d13497a5b4bc93d742e7e5daace0') in 0.008503 seconds
   Import took 0.011120 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 267.587370 seconds.
+  path: Assets/Scenes
+  artifactKey: Guid(e88556ebbab604a4e808813b6e53b270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes using Guid(e88556ebbab604a4e808813b6e53b270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1de4f348e9a5d7e6ebe53fac431a37c') in 0.008195 seconds
+  Import took 0.010682 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.329612 seconds.
+  path: Assets/Scenes/Pursue.unity
+  artifactKey: Guid(fd00966267147d5408a2e05c9ca45e1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Pursue.unity using Guid(fd00966267147d5408a2e05c9ca45e1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11708349e4880219e5436959dd7760d5') in 0.013168 seconds
+  Import took 0.015196 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 26.305033 seconds.
+  path: Assets/Scenes/PursueAndPathFollowWithComponents.unity
+  artifactKey: Guid(3ed0c7388a1298345b32d4f912444c2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/PursueAndPathFollowWithComponents.unity using Guid(3ed0c7388a1298345b32d4f912444c2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0acebac8ed8b4a13bab7d9994f0a7f49') in 0.009438 seconds
+  Import took 0.011526 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.088353 seconds.
+  path: Assets/Pursue.cs
+  artifactKey: Guid(fec1e74d15be06644933c85a07ba3ed9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Pursue.cs using Guid(fec1e74d15be06644933c85a07ba3ed9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '251f1a82a414295c93c2ec7ef1323d88') in 0.007016 seconds
+  Import took 0.009242 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
