@@ -15,7 +15,7 @@
 - [A spotify playlist of music to listen to while coding](https://open.spotify.com/user/1155805407/playlist/5NYFsIFTgNOI93hONLbqNI)
 
 ## Contact me
-* Email: bryan.duggan@dit.ie
+* Email: bryan.duggan@tudublin.ie
 * Twitter: [@skooter500](http://twitter.com/skooter500)
 * [My website & other ways to contact me](http://bryanduggan.org)
 
@@ -28,7 +28,22 @@
 - Week 11 - Lab Test - 20%
 - Week 13 - CA Submission & Demo - 50%
 
+## Week 5
+
+### Lab
+A few ideas for todays lab!
+1. Clone [this repo](https://github.com/skooter500/ECS2020) and check out my ECS experiments. If you feel like a challenge, fix the bug in the Life scene. In this scene I am attempting to program a 3D cellular automata (like the Game of Life) in 3D
+2. [Try this lab test](https://github.com/skooter500/GE2-Lab-Test-2019)
+3. Work on your assignment. The first deliverable is due next week
+
+
 ## Week 4
+
+### Lecture
+- [WTPRS & Wander](https://web.microsoftstream.com/video/b6945686-bc22-4d0b-b071-abe4c63130e1?list=studio)
+- [Unity Input System (presented by Tadhg O Rourke)](https://web.microsoftstream.com/video/b2abfc9b-4358-4e83-a8ad-e5242bef3240)
+
+### Lab
 
 - Try [this lab test from 2018](https://github.com/skooter500/GE2-Labtest1-2018) about Offset Pursue. No need to clone the repo as it has the solution in it! 
 
