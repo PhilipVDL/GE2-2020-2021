@@ -28,14 +28,24 @@
 - Week 11 - Lab Test - 20%
 - Week 13 - CA Submission & Demo - 50%
 
-## Week 5
+## Week 6 - Finite State Machines
+
+### Lab
+- [Submit the github repo for your assignment](https://docs.google.com/forms/d/e/1FAIpQLSf8XGjtZjvkVs7NTt9gOq3H2ls7VryCiwH2uVhHWTWxxycv1g/viewform)
+- Make a behaviour called Constrain that keeps a boid inside a sphere of interest. If the boid goes outside the sphere, generate a force to push the boid back towards the centre of the sphere.
+- Make some creatures with NoiseWander, Harmonic, Constrain and the SpineAnimator 
+
+## Week 5 - Harmonic & NoiseWander
+### Lecture
+- [Video of the class on Thursday](https://web.microsoftstream.com/video/d27e6703-6350-4fa4-8345-532837de2cdb)
+- [Video of the class on Thursday](https://web.microsoftstream.com/video/bb01cfa3-cdcb-4036-b30c-4db2c891a0e0)
+- [A playlist of my creatures]()
 
 ### Lab
 A few ideas for todays lab!
 1. Clone [this repo](https://github.com/skooter500/ECS2020) and check out my ECS experiments. If you feel like a challenge, fix the bug in the Life scene. In this scene I am attempting to program a 3D cellular automata (like the Game of Life) in 3D
 2. [Try this lab test](https://github.com/skooter500/GE2-Lab-Test-2019)
 3. Work on your assignment. The first deliverable is due next week
-
 
 ## Week 4
 
