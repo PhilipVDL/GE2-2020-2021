@@ -62,10 +62,14 @@ public class StateMachine : MonoBehaviour {
 
     public void ChangeState(State newState)
     {
-        previousState = currentState;
+        
         if (currentState != null)
         {
             currentState.Exit();
+        }
+        if (this.previousState == null || previousState.GetType() != this.previousState.GetType())
+        {
+            this.previousState = currentState;
         }
         currentState = newState;
         currentState.owner = this;
@@ -89,5 +93,19 @@ public class StateMachine : MonoBehaviour {
             
             yield return new WaitForSeconds(1.0f / (float)updatesPerSecond);
         }
-    }    
+    }
+
+    public void SetGlobalState(State state)
+    {
+        if (globalState != null)
+        {
+            globalState.Exit();
+        }
+        globalState = state;
+        if (globalState != null)
+        {
+            globalState.owner = this;
+            globalState.Enter();
+        }        
+    }
 }
